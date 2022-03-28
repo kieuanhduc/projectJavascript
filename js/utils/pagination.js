@@ -1,12 +1,15 @@
 
 export function renderPagination(elementId,pagination){
 
+   
+
     const ulPagination = document.getElementById(elementId)
 
 
     if(!pagination || !ulPagination) return;
     //calc totalpage
 
+  
     const {_page,_limit,_totalRows} = pagination
     const totalPage = Math.ceil(_totalRows/_limit)
 
@@ -30,12 +33,16 @@ export function renderPagination(elementId,pagination){
 }
 
 
-export function initPagination(elementId,defaultParams,onchange){
+export function initPagination({elementId,defaultParams,onchange}){ 
+   
     // bind click event for prev/next link
     const ulPagination = document.getElementById(elementId)
+  
+  
     if(!ulPagination) return
 
     //set current active page
+ 
     //use default params
 
     //add click event for prev link
@@ -44,19 +51,22 @@ export function initPagination(elementId,defaultParams,onchange){
         prevLink.addEventListener('click',(e)=>{
             e.preventDefault();
             const page = Number.parseInt(ulPagination.dataset.page) || 1
-            if(page > 2 ) onchange('_page',page - 1 )
+            if(page > 2 ) onchange(page - 1 )
         })
     }
 
     // add click event for next link
     const nextLink = ulPagination.lastElementChild?.lastElementChild
+   
     if(nextLink){
         nextLink.addEventListener("click",(e) => {
             e.preventDefault();
+         
             const page = Number.parseInt(ulPagination.dataset.page) || 1
             const totalPages = ulPagination.dataset.totalPages
+            
         
-            if(page < totalPages ) onchange('_page',page + 1 )
+            if(page < totalPages ) onchange(page + 1 )
         })
     }
 

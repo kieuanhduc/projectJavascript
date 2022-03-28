@@ -3,11 +3,9 @@ import postApi from "./api/postApi";
 import { initPagination, initSearch, renderPagination, renderPostList } from './utils/index';
 
 
-
-
-
 async function handleFilterChange(filterName,filterValue){
-
+  console.log("filterName",filterName)
+  console.log("filterValue",filterValue)
         try {
              // update query params
             const url = new URL(window.location);
@@ -22,7 +20,7 @@ async function handleFilterChange(filterName,filterValue){
             //fetch api 
             const {data,pagination} = await postApi.getAll(url.searchParams)
             //re-render post list
-            renderPostList(data)
+            renderPostList("postsList",data)
             renderPagination("pagination",pagination)
 
         } catch (error) {
@@ -52,8 +50,10 @@ async function handleFilterChange(filterName,filterValue){
         initPagination({
             elementId: 'pagination',
             defaultParams:queryParams,
-            onchange: (page) => handleFilterChange('_page',page)
+            onchange: (page) => handleFilterChange('_page',page),
         })
+
+    
 
         initSearch({
             elementId: 'searchInput',
@@ -68,7 +68,7 @@ async function handleFilterChange(filterName,filterValue){
 
         const {data,pagination} = await postApi.getAll(queryParams)
 
-        renderPostList(data)
+        renderPostList("postsList",data)
         renderPagination('pagination',pagination)
 
         } catch (error) {

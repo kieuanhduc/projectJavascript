@@ -38,10 +38,10 @@ export function createPostElement(post){
   
 }
 
-export function renderPostList(postList){
+export function renderPostList(elementId,postList){
 
-    // console.log(postList)
-    const ulElement = document.getElementById('postsList')
+    console.log(postList)
+    const ulElement = document.getElementById(elementId)
 
     if(!Array.isArray(postList) || postList.length === 0) {
         ulElement.textContent = ""
